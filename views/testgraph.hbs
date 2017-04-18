@@ -1,0 +1,43 @@
+<style type="text/css">
+    body, html {
+      font-family: sans-serif;
+    }
+  </style>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script>
+  <script src="/vendors/jquery/dist/jquery.min.js"></script>
+
+<div id="visualization"></div>
+<script type="text/javascript">
+    var container = document.getElementById('visualization');
+  var items = [
+    {x: 0, y: 10},
+    {x: 0.05, y: 25},
+    {x: 0.10, y: 30},
+    {x: 0.15, y: 40},
+    {x: 0.20, y: 45},
+    {x: 0.25, y: 50}
+  ];
+
+  var dataset = new vis.DataSet(items);
+  var options = {
+    start: 0,
+    end: 50,
+    autoResize : true
+  };
+  var graph2d = new vis.Graph2d(container, dataset, options);
+  var x= 0.30;
+  var y = 50;
+  $(document).ready(function(){
+    setInterval(function(){
+      console.log("Inserting");
+      dataset.add({
+        x : x+=0.5,
+        y : y+=Math.floor(Math.random() * (10)) + 0
+      });
+
+      graph2d.redraw();
+    }, 500);
+  });
+</script>
